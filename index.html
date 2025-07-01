@@ -9,6 +9,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap'); /* Added Inter for numbers/times */
 
     :root {
+      /* Dark Mode Defaults */
       --bg-start: #ee7752;
       --bg-mid1: #e73c7e;
       --bg-mid2: #23a6d5;
@@ -21,13 +22,69 @@
       --accent-gold: #ffd700;
       --current-day-bg: rgba(255, 0, 150, 0.25);
       --current-class-bg: linear-gradient(135deg, rgba(255, 107, 107, 0.9), rgba(255, 217, 61, 0.9));
-      /* New reddish gradient for next class widget */
       --widget-bg: linear-gradient(135deg, rgba(255, 99, 71, 0.8), rgba(255, 69, 0, 0.8));
       --widget-border-glow: linear-gradient(45deg, #ff4500, #ff6347, #ffa500, #ff4500);
       --countdown-bg: rgba(255, 255, 255, 0.15);
       --countdown-border: rgba(255, 255, 255, 0.3);
       --countdown-text: #fff;
       --countdown-glow: rgba(0, 255, 255, 0.4);
+      --modal-bg: rgba(255, 255, 255, 0.15);
+      --modal-border: rgba(255, 255, 255, 0.3);
+      --modal-shadow: rgba(0, 0, 0, 0.3);
+      --modal-close-btn: rgba(255, 255, 255, 0.7);
+      --input-bg: rgba(0, 0, 0, 0.2);
+      --input-border: var(--glass-border);
+      --input-color: var(--text-light);
+      --input-placeholder: rgba(255, 255, 255, 0.6);
+      --response-area-bg: rgba(0, 0, 0, 0.25);
+      --response-area-border: rgba(255, 255, 255, 0.2);
+      --button-text: white;
+      --message-box-bg: linear-gradient(135deg, #4CAF50, #8BC34A); /* Green gradient for success */
+      --message-box-border: #4CAF50;
+      --message-box-shadow: rgba(76, 175, 80, 0.4);
+      --message-box-text: white;
+      --copy-button-bg: linear-gradient(45deg, #FFD700, #FFA500);
+      --copy-button-hover-bg: linear-gradient(45deg, #FFA500, #FFD700);
+      --copy-button-shadow: rgba(255, 215, 0, 0.4);
+    }
+
+    body.light-mode {
+      --bg-start: #89f7fe;
+      --bg-mid1: #66a6ff;
+      --bg-mid2: #a1c4fd;
+      --bg-end: #c2e9fb;
+      --glass-bg: rgba(255, 255, 255, 0.6);
+      --glass-border: rgba(0, 0, 0, 0.1);
+      --glass-shadow: rgba(0, 0, 0, 0.1);
+      --text-light: #333;
+      --text-dark: #eee;
+      --accent-gold: #da9100;
+      --current-day-bg: rgba(255, 192, 203, 0.5); /* Light pink */
+      --current-class-bg: linear-gradient(135deg, rgba(255, 160, 122, 0.8), rgba(255, 223, 186, 0.8)); /* Lighter gradient */
+      --widget-bg: linear-gradient(135deg, rgba(255, 140, 0, 0.8), rgba(255, 165, 0, 0.8));
+      --widget-border-glow: linear-gradient(45deg, #ff8c00, #ffa500, #ffd700, #ff8c00);
+      --countdown-bg: rgba(0, 0, 0, 0.1);
+      --countdown-border: rgba(0, 0, 0, 0.2);
+      --countdown-text: #333;
+      --countdown-glow: rgba(0, 191, 255, 0.4);
+      --modal-bg: rgba(255, 255, 255, 0.9);
+      --modal-border: rgba(0, 0, 0, 0.15);
+      --modal-shadow: rgba(0, 0, 0, 0.2);
+      --modal-close-btn: rgba(51, 51, 51, 0.7);
+      --input-bg: rgba(255, 255, 255, 0.8);
+      --input-border: rgba(0, 0, 0, 0.2);
+      --input-color: var(--text-light);
+      --input-placeholder: rgba(51, 51, 51, 0.6);
+      --response-area-bg: rgba(255, 255, 255, 0.7);
+      --response-area-border: rgba(0, 0, 0, 0.1);
+      --button-text: white; /* Buttons remain white text for contrast */
+      --message-box-bg: linear-gradient(135deg, #4CAF50, #8BC34A);
+      --message-box-border: #4CAF50;
+      --message-box-shadow: rgba(76, 175, 80, 0.4);
+      --message-box-text: white;
+      --copy-button-bg: linear-gradient(45deg, #FFD700, #FFA500);
+      --copy-button-hover-bg: linear-gradient(45deg, #FFA500, #FFD700);
+      --copy-button-shadow: rgba(255, 215, 0, 0.4);
     }
     
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -46,6 +103,7 @@
       overflow-y: auto; /* Allow vertical scrolling for the body */
       overflow-x: auto; /* Allow horizontal scrolling for the body */
       color: var(--text-light); 
+      transition: background-color 0.5s ease; /* Smooth transition for theme change */
     }
     
     @keyframes gradient-bg {
@@ -114,6 +172,7 @@
       position: relative;
       overflow: hidden;
       margin-bottom: 20px; 
+      color: var(--text-light); /* Ensure text color changes with theme */
     }
 
     #dynamic-class-widget::before {
@@ -138,7 +197,7 @@
       font-size: 28px;
       font-weight: 900;
       margin-bottom: 15px;
-      color: #fff;
+      color: var(--text-light); /* Ensure text color changes with theme */
       text-shadow: 0 0 8px rgba(255, 255, 255, 0.4); 
       background: linear-gradient(45deg, #ff8c00, #ff4500); 
       -webkit-background-clip: text;
@@ -149,7 +208,7 @@
     #dynamic-class-widget p {
       font-size: 20px;
       margin-bottom: 5px; 
-      color: rgba(255, 255, 255, 0.9);
+      color: var(--text-light); /* Ensure text color changes with theme */
       line-height: 1.5;
     }
 
@@ -162,7 +221,7 @@
     #dynamic-class-widget .teacher-name-english {
         font-family: 'Inter', sans-serif;
         font-size: 16px;
-        color: rgba(255, 255, 255, 0.7);
+        color: var(--text-light); /* Ensure text color changes with theme */
         margin-bottom: 15px; 
     }
 
@@ -179,12 +238,12 @@
         gap: 10px;
         margin-bottom: 20px;
         padding: 10px 15px;
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--glass-bg); /* Use glass-bg for consistency */
         border-radius: 15px;
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 2px 10px var(--glass-shadow);
     }
 
     .zoom-level {
@@ -230,16 +289,13 @@
       width: 100%; 
       border-collapse: separate; 
       border-spacing: 0;
-      /* background: var(--glass-bg); -- র্যাপারে চলে গেছে */
-      /* backdrop-filter: blur(12px); -- র্যাপারে চলে গেছে */
-      /* border: 1px solid var(--glass-border); -- র্যাপারে চলে গেছে */
       border-radius: 24px;
       overflow: hidden;
       position: relative;
-      /* box-shadow: 0 4px 18px var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.1); -- র্যাপারে চলে গেছে */
       transform-origin: top left; /* জুম করার জন্য মূলবিন্দু */
       transition: transform 0.2s ease-out; /* জুম ট্রানজিশন মসৃণ করার জন্য */
       min-width: 100%; /* র্যাপারের প্রস্থের নিচে যেন না যায় */
+      color: var(--text-light); /* Ensure text color changes with theme */
     }
     
     /* টেবিলের গ্লো অ্যানিমেশন র্যাপারে চলে গেছে */
@@ -256,7 +312,7 @@
       padding: 30px 20px;
       font-size: 38px;
       font-weight: 900;
-      color: #fff;
+      color: var(--text-light); /* Ensure text color changes with theme */
       text-shadow: 0 0 12px rgba(255, 255, 255, 0.2); 
       background: linear-gradient(45deg, #667eea, #764ba2);
       background-clip: text;
@@ -273,7 +329,7 @@
     th, td { 
       padding: 18px 12px; 
       text-align: center; 
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--glass-border); /* Use glass-border */
       transition: all 0.1s ease-out; 
       position: relative;
       overflow: hidden; 
@@ -295,7 +351,7 @@
     thead th { 
       background: rgba(0, 0, 0, 0.12); 
       backdrop-filter: blur(6px); 
-      color: #fff; 
+      color: var(--text-light); 
       font-weight: bold;
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); 
       cursor: default;
@@ -308,7 +364,7 @@
     
     tbody td {
       background: rgba(255, 255, 255, 0.02); 
-      color: #fff;
+      color: var(--text-light);
       cursor: pointer;
     }
     
@@ -391,7 +447,7 @@
       background-size: 300% 300%;
       backdrop-filter: blur(9px); 
       border-radius: 12px;
-      color: #fff !important;
+      color: var(--button-text) !important; /* Use button-text for consistency */
       font-weight: bold;
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); 
       animation: class-gradient 9s ease infinite, class-glow 4s ease-in-out infinite alternate; 
@@ -441,7 +497,7 @@
         rgba(240, 147, 251, 0.5), rgba(245, 87, 108, 0.5)); 
       background-size: 300% 300%;
       backdrop-filter: blur(9px); 
-      color: #fff !important;
+      color: var(--button-text) !important; /* Use button-text for consistency */
       font-weight: bold;
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); 
       animation: time-gradient 8s ease infinite, time-glow 3.5s ease-in-out infinite alternate; 
@@ -462,14 +518,14 @@
     
     .class-name { 
       font-weight: bold; 
-      color: #fff;
+      color: var(--text-light); /* Ensure text color changes with theme */
       margin-bottom: 4px;
       font-size: 16px;
     }
     
     .class-info { 
       font-size: 12px; 
-      color: rgba(255, 255, 255, 0.8);
+      color: var(--text-light); /* Ensure text color changes with theme */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -512,15 +568,15 @@
     }
 
     .teacher-modal-content {
-        background: rgba(255, 255, 255, 0.12); 
+        background: var(--modal-bg); 
         backdrop-filter: blur(25px);
         -webkit-backdrop-filter: blur(25px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        border: 1px solid var(--modal-border);
         border-radius: 20px;
         padding: 30px;
         color: var(--text-light);
         text-align: center;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        box-shadow: 0 10px 40px var(--modal-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
         max-width: 400px;
         width: 90%;
         transform: scale(0.9);
@@ -547,14 +603,14 @@
     .teacher-modal-content .english-name {
         font-family: 'Inter', sans-serif; 
         font-size: 18px;
-        color: rgba(255, 255, 255, 0.8);
+        color: var(--text-light); /* Ensure text color changes with theme */
         margin-bottom: 15px; 
     }
 
     .teacher-modal-content p {
         font-size: 18px;
         margin-bottom: 10px;
-        color: rgba(255, 255, 255, 0.9);
+        color: var(--text-light); /* Ensure text color changes with theme */
     }
 
     .teacher-modal-content .close-button {
@@ -564,13 +620,13 @@
         background: none;
         border: none;
         font-size: 24px;
-        color: rgba(255, 255, 255, 0.7);
+        color: var(--modal-close-btn); /* Use modal-close-btn variable */
         cursor: pointer;
         transition: color 0.3s ease, transform 0.3s ease;
     }
 
     .teacher-modal-content .close-button:hover {
-        color: #fff;
+        color: var(--text-light); /* Use text-light for hover */
         transform: rotate(90deg);
     }
 
@@ -579,7 +635,7 @@
         background: linear-gradient(45deg, #00c6ff, #0072ff);
         border: none;
         border-radius: 10px;
-        color: white;
+        color: var(--button-text);
         padding: 12px 25px;
         font-size: 16px;
         font-weight: bold;
@@ -609,12 +665,12 @@
     .search-input {
         width: 100%;
         padding: 15px 20px;
-        border: 1px solid var(--glass-border);
+        border: 1px solid var(--input-border); /* Use input-border */
         border-radius: 15px;
-        background: rgba(255, 255, 255, 0.1);
+        background: var(--input-bg); /* Use input-bg */
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        color: var(--text-light);
+        color: var(--input-color); /* Use input-color */
         font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
         font-size: 18px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -622,7 +678,7 @@
     }
 
     .search-input::placeholder {
-        color: rgba(255, 255, 255, 0.6);
+        color: var(--input-placeholder); /* Use input-placeholder */
     }
 
     .search-input:focus {
@@ -639,17 +695,17 @@
         gap: 10px;
         margin-bottom: 20px;
         padding: 10px;
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--glass-bg); /* Use glass-bg */
         border-radius: 15px;
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 2px 10px var(--glass-shadow);
     }
 
     .day-filter-button {
         background: rgba(255, 255, 255, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        border: 1px solid var(--glass-border);
         border-radius: 10px;
         color: var(--text-light);
         padding: 10px 18px;
@@ -735,15 +791,15 @@
     }
 
     .llm-modal-overlay .modal-content {
-        background: rgba(255, 255, 255, 0.15); 
+        background: var(--modal-bg); 
         backdrop-filter: blur(25px);
         -webkit-backdrop-filter: blur(25px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        border: 1px solid var(--modal-border);
         border-radius: 20px;
         padding: 30px;
         color: var(--text-light);
         text-align: center;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        box-shadow: 0 10px 40px var(--modal-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
         max-width: 600px;
         width: 90%;
         transform: scale(0.9);
@@ -774,10 +830,10 @@
         width: 100%;
         min-height: 80px;
         padding: 10px 15px;
-        border: 1px solid var(--glass-border);
+        border: 1px solid var(--input-border);
         border-radius: 10px;
-        background: rgba(0, 0, 0, 0.2);
-        color: var(--text-light);
+        background: var(--input-bg);
+        color: var(--input-color);
         font-family: 'Noto Sans Bengali', sans-serif;
         font-size: 16px;
         resize: vertical;
@@ -793,7 +849,7 @@
         background: linear-gradient(45deg, #2af598, #009efd);
         border: none;
         border-radius: 10px;
-        color: white;
+        color: var(--button-text);
         padding: 12px 25px;
         font-size: 16px;
         font-weight: bold;
@@ -809,8 +865,8 @@
     }
 
     .llm-modal-overlay .modal-content .response-area {
-        background: rgba(0, 0, 0, 0.25);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: var(--response-area-bg);
+        border: 1px solid var(--response-area-border);
         border-radius: 10px;
         padding: 15px;
         min-height: 100px;
@@ -821,6 +877,7 @@
         max-height: 200px;
         white-space: pre-wrap; /* Preserve whitespace and wrap text */
         word-wrap: break-word; /* Break long words */
+        color: var(--text-light); /* Ensure text color changes with theme */
     }
 
     .llm-modal-overlay .modal-content .loading-spinner {
@@ -844,7 +901,7 @@
         background: linear-gradient(45deg, #f093fb, #f5576c);
         border: none;
         border-radius: 8px;
-        color: white;
+        color: var(--button-text);
         padding: 6px 10px;
         font-size: 12px;
         font-weight: bold;
@@ -869,7 +926,7 @@
         background: linear-gradient(45deg, #2af598, #009efd); 
         border: none;
         border-radius: 8px;
-        color: white;
+        color: var(--button-text);
         padding: 6px 10px;
         font-size: 12px;
         font-weight: bold;
@@ -896,17 +953,17 @@
         gap: 15px;
         margin-bottom: 20px;
         padding: 10px;
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--glass-bg);
         border-radius: 15px;
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 2px 10px var(--glass-shadow);
     }
 
     .toggle-button {
         background: rgba(255, 255, 255, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        border: 1px solid var(--glass-border);
         border-radius: 10px;
         color: var(--text-light);
         padding: 10px 20px;
@@ -929,6 +986,182 @@
         border-color: #f5576c;
         box-shadow: 0 4px 10px rgba(245, 87, 108, 0.5);
         transform: translateY(-1px);
+    }
+
+    /* থিম টগল বাটন */
+    .theme-toggle-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 10px 15px;
+        background: var(--glass-bg);
+        border-radius: 15px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 2px 10px var(--glass-shadow);
+    }
+
+    .theme-toggle-label {
+        font-size: 18px;
+        font-weight: bold;
+        color: var(--text-light);
+    }
+
+    .theme-switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .theme-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 34px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+    /* কাস্টম মেসেজ বক্স */
+    #messageBoxOverlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000; /* Higher than all other modals */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    #messageBoxOverlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    #messageBox {
+        background: var(--message-box-bg);
+        border: 1px solid var(--message-box-border);
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 8px 25px var(--message-box-shadow);
+        max-width: 350px;
+        width: 90%;
+        color: var(--message-box-text);
+        transform: translateY(-20px);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    #messageBoxOverlay.active #messageBox {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    #messageBox p {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    #messageBox button {
+        background-color: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 8px;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    #messageBox button:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-1px);
+    }
+
+    /* কপি বাটন */
+    .copy-button {
+        background: var(--copy-button-bg);
+        border: none;
+        border-radius: 8px;
+        color: var(--button-text);
+        padding: 8px 15px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 10px;
+        box-shadow: 0 2px 5px var(--copy-button-shadow);
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .copy-button:hover {
+        background: var(--copy-button-hover-bg);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px var(--copy-button-shadow);
     }
 
 
@@ -958,6 +1191,10 @@
         .ask-gemini-button, .class-summary-button { padding: 5px 8px; font-size: 11px; }
         .toggle-button { padding: 8px 15px; font-size: 16px; }
         .zoom-level { font-size: 16px; }
+        .theme-toggle-label { font-size: 16px; }
+        #messageBox p { font-size: 16px; }
+        #messageBox button { font-size: 14px; padding: 8px 16px; }
+        .copy-button { padding: 6px 12px; font-size: 12px; }
     }
 
     @media (max-width: 768px) {
@@ -990,6 +1227,10 @@
       .toggle-button { padding: 6px 12px; font-size: 14px; }
       .toggle-buttons-container { gap: 10px; padding: 8px; }
       .zoom-level { font-size: 14px; }
+      .theme-toggle-label { font-size: 14px; }
+      #messageBox p { font-size: 14px; }
+      #messageBox button { font-size: 12px; padding: 6px 12px; }
+      .copy-button { padding: 5px 10px; font-size: 11px; }
     }
 
     @media (max-width: 480px) {
@@ -1022,6 +1263,10 @@
         .toggle-button { padding: 5px 10px; font-size: 12px; }
         .toggle-buttons-container { gap: 8px; padding: 6px; }
         .zoom-level { font-size: 12px; }
+        .theme-toggle-label { font-size: 12px; }
+        #messageBox p { font-size: 12px; }
+        #messageBox button { font-size: 10px; padding: 5px 10px; }
+        .copy-button { padding: 4px 8px; font-size: 10px; }
     }
     
     /* লোডিং অ্যানিমেশন */
@@ -1037,7 +1282,17 @@
   <div class="particles"></div>
   
   <div class="container">
-    <!-- টগল বাটন -->
+    <!-- থিম টoggle বাটন -->
+    <div class="theme-toggle-container">
+        <span class="theme-toggle-label">ডার্ক মোড</span>
+        <label class="theme-switch">
+            <input type="checkbox" id="themeToggle">
+            <span class="slider round"></span>
+        </label>
+        <span class="theme-toggle-label">লাইট মোড</span>
+    </div>
+
+    <!-- টoggle বাটন -->
     <div class="toggle-buttons-container">
         <button id="currentClassBtn" class="toggle-button">বর্তমান ক্লাস</button>
         <button id="upcomingClassBtn" class="toggle-button active">পরবর্তী ক্লাস</button>
@@ -1324,6 +1579,7 @@
       <button id="askClassGeminiButton">প্রশ্ন করুন ✨</button>
       <div class="loading-spinner" id="classQueryLoadingSpinner"></div>
       <div class="response-area" id="classQueryResponseArea"></div>
+      <button class="copy-button" id="copyClassQueryResponse">কপি করুন</button>
     </div>
   </div>
 
@@ -1336,14 +1592,19 @@
       <button id="askClassSummaryButton">সারাংশ ও প্রস্তুতি তৈরি করুন ✨</button>
       <div class="loading-spinner" id="classSummaryLoadingSpinner"></div>
       <div class="response-area" id="classSummaryResponseArea"></div>
+      <button class="copy-button" id="copyClassSummaryResponse">কপি করুন</button>
+    </div>
+  </div>
+
+  <!-- কাস্টম মেসেজ বক্স -->
+  <div id="messageBoxOverlay">
+    <div id="messageBox">
+      <p id="messageBoxText"></p>
+      <button id="messageBoxCloseButton">ঠিক আছে</button>
     </div>
   </div>
 
   <script>
-    // আপনার Gemini API Key এখানে দিন। এটি পাবলিকলি উন্মুক্ত করা ঝুঁকিপূর্ণ।
-    // শুধুমাত্র ব্যক্তিগত বা টেস্টিং উদ্দেশ্যে ব্যবহার করুন।
-    // Canvas এনভায়রনমেন্ট স্বয়ংক্রিয়ভাবে API কী সরবরাহ করে, তাই এটিকে খালি রাখা হয়েছিল।
-    // ব্যবহারকারীর দেওয়া API কী ব্যবহার করা হয়েছে।
     const API_KEY = "AIzaSyAyKPocbERL1XmrzTkR73306yAwpIPdxPY"; 
 
     // ভাসমান কণা তৈরি করার ফাংশন
@@ -1915,7 +2176,7 @@
                 profileButton.classList.add('visit-profile-button'); 
                 teacherProfileButtonContainer.appendChild(profileButton);
             } else {
-                teacherProfileButtonContainer.innerHTML = `<span style="opacity: 0.7; font-style: italic; display: block; margin-top: 10px; color: rgba(255,255,255,0.7);">প্রোফাইল লিঙ্ক উপলব্ধ নেই।</span>`;
+                widgetProfileButtonContainer.innerHTML = `<span style="opacity: 0.7; font-style: italic; display: block; margin-top: 10px; color: rgba(255,255,255,0.7);">প্রোফাইল লিঙ্ক উপলব্ধ নেই।</span>`;
             }
             teacherModal.classList.add('active');
         } else {
@@ -2062,6 +2323,7 @@
     const askClassGeminiButton = document.getElementById('askClassGeminiButton');
     const classQueryLoadingSpinner = document.getElementById('classQueryLoadingSpinner');
     const classQueryResponseArea = document.getElementById('classQueryResponseArea');
+    const copyClassQueryResponseButton = document.getElementById('copyClassQueryResponse');
 
     let currentSubjectForClassQuery = '';
 
@@ -2072,6 +2334,7 @@
         classQueryResponseArea.textContent = ''; 
         classQueryLoadingSpinner.style.display = 'none'; 
         classQueryModal.classList.add('active');
+        copyClassQueryResponseButton.style.display = 'none'; // Hide copy button initially
     }
 
     function closeClassQueryModal() {
@@ -2090,8 +2353,18 @@
         classQueryLoadingSpinner.style.display = 'block'; 
         classQueryResponseArea.textContent = ''; 
         askClassGeminiButton.disabled = true; 
+        copyClassQueryResponseButton.style.display = 'none';
 
-        const prompt = `Provide a concise overview of the key concepts typically covered in a college-level ${subject} class. Also, suggest one or two common challenges students face in this subject and a tip to overcome them. User's specific question: "${question}". Please answer in Bengali.`;
+        const overviewKeywords = ["মূল বিষয়", "সারাংশ", "পরিচয়", "ব্যাপারে", "কী কী পড়ানো হয়", "পাঠ্যক্রম", "ওভারভিউ", "overview", "main topics", "syllabus", "সম্পর্কে"];
+        const needsOverview = overviewKeywords.some(keyword => question.toLowerCase().includes(keyword));
+
+        let prompt;
+        if (needsOverview) {
+            prompt = `Provide a concise overview of the key concepts typically covered in a college-level ${subject} class. Also, suggest one or two common challenges students face in this subject and a tip to overcome them. User's specific question: "${question}". Please answer in Bengali.`;
+        } else {
+            // Direct answer prompt
+            prompt = `Provide only the direct and concise answer to the following question about a college-level ${subject} class, without any introductory or concluding remarks: "${question}". Answer in Bengali.`;
+        }
 
         let chatHistory = [];
         chatHistory.push({ role: "user", parts: [{ text: prompt }] });
@@ -2114,6 +2387,7 @@
                 result.candidates[0].content.parts.length > 0) {
                 const text = result.candidates[0].content.parts[0].text;
                 classQueryResponseArea.textContent = text;
+                copyClassQueryResponseButton.style.display = 'inline-block'; // Show copy button
             } else {
                 classQueryResponseArea.textContent = "দুঃখিত, আপনার প্রশ্নের উত্তর খুঁজে পাওয়া যায়নি। (API প্রতিক্রিয়া অপ্রত্যাশিত ছিল)";
                 console.error("Gemini API response structure unexpected:", result);
@@ -2132,7 +2406,7 @@
         if (currentSubjectForClassQuery && question) {
             askGeminiAboutClass(currentSubjectForClassQuery, question);
         } else if (!question) {
-            classQueryResponseArea.textContent = "অনুগ্রহ করে আপনার প্রশ্ন লিখুন।";
+            showMessage("অনুগ্রহ করে আপনার প্রশ্ন লিখুন।");
         }
     });
 
@@ -2153,6 +2427,7 @@
     const askClassSummaryButton = document.getElementById('askClassSummaryButton');
     const classSummaryLoadingSpinner = document.getElementById('classSummaryLoadingSpinner');
     const classSummaryResponseArea = document.getElementById('classSummaryResponseArea');
+    const copyClassSummaryResponseButton = document.getElementById('copyClassSummaryResponse');
 
     let currentSubjectForClassSummary = '';
 
@@ -2163,6 +2438,7 @@
         classSummaryResponseArea.textContent = ''; 
         classSummaryLoadingSpinner.style.display = 'none'; 
         classSummaryModal.classList.add('active');
+        copyClassSummaryResponseButton.style.display = 'none'; // Hide copy button initially
     }
 
     function closeClassSummaryModal() {
@@ -2181,6 +2457,7 @@
         classSummaryLoadingSpinner.style.display = 'block'; 
         classSummaryResponseArea.textContent = ''; 
         askClassSummaryButton.disabled = true; 
+        copyClassSummaryResponseButton.style.display = 'none';
 
         const prompt = `For a college-level ${subject} class, provide a concise summary of the topic: '${topic}'. Include 3-5 key points and suggest one practical study tip related to this topic. Answer in Bengali.`;
 
@@ -2205,6 +2482,7 @@
                 result.candidates[0].content.parts.length > 0) {
                 const text = result.candidates[0].content.parts[0].text;
                 classSummaryResponseArea.textContent = text;
+                copyClassSummaryResponseButton.style.display = 'inline-block'; // Show copy button
             } else {
                 classSummaryResponseArea.textContent = "দুঃখিত, আপনার অনুরোধের সারাংশ তৈরি করা যায়নি। (API প্রতিক্রিয়া অপ্রত্যাশিত ছিল)";
                 console.error("Gemini API response structure unexpected:", result);
@@ -2223,7 +2501,7 @@
         if (currentSubjectForClassSummary && topic) {
             askGeminiForClassSummary(currentSubjectForClassSummary, topic);
         } else if (!topic) {
-            classSummaryResponseArea.textContent = "অনুগ্রহ করে একটি বিষয় বা প্রস্তুতির ধরন লিখুন।";
+            showMessage("অনুগ্রহ করে একটি বিষয় বা প্রস্তুতির ধরন লিখুন।");
         }
     });
 
@@ -2304,6 +2582,84 @@
             applyZoom();
         }
     }, { passive: false });
+
+    // থিম সুইচার কার্যকারিতা
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    function applyTheme(theme) {
+        if (theme === 'light') {
+            body.classList.add('light-mode');
+            themeToggle.checked = true;
+        } else {
+            body.classList.remove('light-mode');
+            themeToggle.checked = false;
+        }
+    }
+
+    // Load saved theme from localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        applyTheme(savedTheme);
+    } else {
+        // Default to dark mode if no theme is saved
+        applyTheme('dark');
+    }
+
+    themeToggle.addEventListener('change', () => {
+        if (themeToggle.checked) {
+            applyTheme('light');
+            localStorage.setItem('theme', 'light');
+        } else {
+            applyTheme('dark');
+            localStorage.setItem('theme', 'dark');
+        }
+    });
+
+    // কাস্টম মেসেজ বক্স কার্যকারিতা
+    const messageBoxOverlay = document.getElementById('messageBoxOverlay');
+    const messageBox = document.getElementById('messageBox');
+    const messageBoxText = document.getElementById('messageBoxText');
+    const messageBoxCloseButton = document.getElementById('messageBoxCloseButton');
+
+    function showMessage(message) {
+        messageBoxText.textContent = message;
+        messageBoxOverlay.classList.add('active');
+    }
+
+    messageBoxCloseButton.addEventListener('click', () => {
+        messageBoxOverlay.classList.remove('active');
+    });
+
+    messageBoxOverlay.addEventListener('click', (e) => {
+        if (e.target === messageBoxOverlay) {
+            messageBoxOverlay.classList.remove('active');
+        }
+    });
+
+    // কপি বাটন কার্যকারিতা
+    function copyToClipboard(textToCopy) {
+        const textArea = document.createElement('textarea');
+        textArea.value = textToCopy;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showMessage("কপি করা হয়েছে!");
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+            showMessage("কপি করতে ব্যর্থ হয়েছে।");
+        }
+        document.body.removeChild(textArea);
+    }
+
+    copyClassQueryResponseButton.addEventListener('click', () => {
+        copyToClipboard(classQueryResponseArea.textContent);
+    });
+
+    copyClassSummaryResponseButton.addEventListener('click', () => {
+        copyToClipboard(classSummaryResponseArea.textContent);
+    });
 
 
     // পৃষ্ঠা লোড হলে সব কিছু ইনিশিয়ালাইজ করুন
