@@ -2400,11 +2400,19 @@
 
         const isDetailedMode = llmResponseModeToggle.checked;
 
+        const overviewKeywords = ["মূল বিষয়", "সারাংশ", "পরিচয়", "ব্যাপারে", "কী কী পড়ানো হয়", "পাঠ্যক্রম", "ওভারভিউ", "overview", "main topics", "syllabus", "সম্পর্কে"];
+        const questionAsksForOverview = overviewKeywords.some(keyword => question.toLowerCase().includes(keyword));
+
         let prompt;
         if (isDetailedMode) {
-            prompt = `Provide a concise overview of the key concepts typically covered in a college-level ${subject} class. Also, suggest one or two common challenges students face in this subject and a tip to overcome them. User's specific question: "${question}". Please answer in Bengali.`;
+            if (questionAsksForOverview) {
+                prompt = `Provide a detailed and comprehensive overview of the key concepts typically covered in a college-level ${subject} class based on the user's explicit request: "${question}". Also, suggest one or two common challenges students face in this subject and a tip to overcome them. Answer in Bengali.`;
+            } else {
+                // Detailed answer to the specific question, without general subject overview
+                prompt = `Provide a detailed and comprehensive answer to the following question about a college-level ${subject} class. Focus directly on answering the question with relevant context and explanation, but do not provide a general overview of the entire subject unless the question explicitly asks for it: "${question}". Answer in Bengali.`;
+            }
         } else {
-            // Direct answer prompt
+            // Direct and concise answer
             prompt = `Provide only the direct and concise answer to the following question about a college-level ${subject} class, without any introductory or concluding remarks: "${question}". Answer in Bengali.`;
         }
 
