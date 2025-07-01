@@ -1164,6 +1164,28 @@
         box-shadow: 0 4px 8px var(--copy-button-shadow);
     }
 
+    /* LLM উত্তর মোড টগল */
+    .llm-response-mode-toggle-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+        padding: 8px 12px;
+        background: var(--glass-bg);
+        border-radius: 12px;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 2px 8px var(--glass-shadow);
+    }
+
+    .llm-response-mode-label {
+        font-size: 16px;
+        font-weight: bold;
+        color: var(--text-light);
+    }
+
 
     /* রেসপনসিভ ডিজাইন */
     @media (max-width: 1024px) {
@@ -1195,6 +1217,7 @@
         #messageBox p { font-size: 16px; }
         #messageBox button { font-size: 14px; padding: 8px 16px; }
         .copy-button { padding: 6px 12px; font-size: 12px; }
+        .llm-response-mode-label { font-size: 14px; }
     }
 
     @media (max-width: 768px) {
@@ -1231,6 +1254,7 @@
       #messageBox p { font-size: 14px; }
       #messageBox button { font-size: 12px; padding: 6px 12px; }
       .copy-button { padding: 5px 10px; font-size: 11px; }
+      .llm-response-mode-label { font-size: 12px; }
     }
 
     @media (max-width: 480px) {
@@ -1267,6 +1291,7 @@
         #messageBox p { font-size: 12px; }
         #messageBox button { font-size: 10px; padding: 5px 10px; }
         .copy-button { padding: 4px 8px; font-size: 10px; }
+        .llm-response-mode-label { font-size: 10px; }
     }
     
     /* লোডিং অ্যানিমেশন */
@@ -1575,6 +1600,15 @@
     <div class="modal-content">
       <button class="close-button" id="classQueryCloseButton">&times;</button>
       <h3 id="classQuerySubjectTitle"></h3>
+      <!-- নতুন LLM উত্তর মোড টগল -->
+      <div class="llm-response-mode-toggle-container">
+          <span class="llm-response-mode-label">সরাসরি উত্তর</span>
+          <label class="theme-switch">
+              <input type="checkbox" id="llmResponseModeToggle">
+              <span class="slider round"></span>
+          </label>
+          <span class="llm-response-mode-label">বিস্তারিত উত্তর</span>
+      </div>
       <textarea id="classQuestionInput" placeholder="আপনার প্রশ্ন লিখুন... (যেমন: এই ক্লাসের মূল বিষয়গুলো কী?)" rows="3"></textarea>
       <button id="askClassGeminiButton">প্রশ্ন করুন ✨</button>
       <div class="loading-spinner" id="classQueryLoadingSpinner"></div>
@@ -2324,6 +2358,7 @@
     const classQueryLoadingSpinner = document.getElementById('classQueryLoadingSpinner');
     const classQueryResponseArea = document.getElementById('classQueryResponseArea');
     const copyClassQueryResponseButton = document.getElementById('copyClassQueryResponse');
+    const llmResponseModeToggle = document.getElementById('llmResponseModeToggle');
 
     let currentSubjectForClassQuery = '';
 
@@ -2335,6 +2370,14 @@
         classQueryLoadingSpinner.style.display = 'none'; 
         classQueryModal.classList.add('active');
         copyClassQueryResponseButton.style.display = 'none'; // Hide copy button initially
+
+        // Load saved LLM response mode
+        const savedLlmMode = localStorage.getItem('llmResponseMode');
+        if (savedLlmMode === 'detailed') {
+            llmResponseModeToggle.checked = true;
+        } else {
+            llmResponseModeToggle.checked = false; // Default to direct
+        }
     }
 
     function closeClassQueryModal() {
@@ -2355,11 +2398,10 @@
         askClassGeminiButton.disabled = true; 
         copyClassQueryResponseButton.style.display = 'none';
 
-        const overviewKeywords = ["মূল বিষয়", "সারাংশ", "পরিচয়", "ব্যাপারে", "কী কী পড়ানো হয়", "পাঠ্যক্রম", "ওভারভিউ", "overview", "main topics", "syllabus", "সম্পর্কে"];
-        const needsOverview = overviewKeywords.some(keyword => question.toLowerCase().includes(keyword));
+        const isDetailedMode = llmResponseModeToggle.checked;
 
         let prompt;
-        if (needsOverview) {
+        if (isDetailedMode) {
             prompt = `Provide a concise overview of the key concepts typically covered in a college-level ${subject} class. Also, suggest one or two common challenges students face in this subject and a tip to overcome them. User's specific question: "${question}". Please answer in Bengali.`;
         } else {
             // Direct answer prompt
@@ -2418,6 +2460,16 @@
             openClassQueryModal(subject);
         }
     });
+
+    // LLM Response Mode Toggle event listener
+    llmResponseModeToggle.addEventListener('change', () => {
+        if (llmResponseModeToggle.checked) {
+            localStorage.setItem('llmResponseMode', 'detailed');
+        } else {
+            localStorage.setItem('llmResponseMode', 'direct');
+        }
+    });
+
 
     // LLM সারাংশ ও প্রস্তুতি পপ-আপ হ্যান্ডলিং (Class Summary Modal)
     const classSummaryModal = document.getElementById('classSummaryModal');
